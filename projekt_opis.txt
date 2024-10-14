@@ -1,0 +1,65 @@
+Dane: https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset
+Dane będę analizował w programie excel.
+
+Na samym początku postawmy sobie pytanie na które postaramy się odpowiedzieć w trakcie analizy danych:
+
+a) Na jakich produktach najwięcej się zarabia?
+b) Czy przeceny na produktach faktycznie bardziej zachęcają ludzi do zakupu tych produktów?
+c) Czy istnieje współczynnik korelacji między oceną produktu, a ilością ocen (możemy to traktować jako ilość zakupów danego produktu).
+
+Excel ma problemy z rozdzielaniem danych z kaggle, dlatego napisałem krótki skrypt w pythonie, który prawidłowo rozdzielił mi dane na kolumny, aby następnie pobrać te dane w pliku Excel.
+
+Będziemy analizowali produkty, także na samym początku możemy usunąć kolumny które nigdy nam się nie przydadzą. W naszym przypadku będę to kolumny:
+-about_product
+-user_id
+-user_name
+-review_id
+-review_title
+-review_content
+-img_link
+-product_link
+-produkt_id 
+
+Na samym początku zrobiłem podstawowe rzeczy:
+-nadanie odpowiednich typów danych dla każdej kolumny
+-sprawdzenie, czy nie ma duplikatów w danych
+-zastąpienie znaku  “₹” na  $.
+-usunięcie kolumn w których występują puste wartości
+
+
+
+Użuwając funkcji =unikatowe() sprawdziłem, żę jest 200 podkategorii które należą do większych kategorii,  np. myszki gamingowe i klawiatury gamingowe mogą być oddzielną dokładnie opisaną podkategorią, ale ja wolę na potrzebę badań, aby były po prostu sprzętem komputerowym.
+Każda kolejna podkategoria jest oddzielana znakiem ‘|’, za pomocą funkcji ,,tekst jako kolumny,, podzieliłem prawidłowo produkty na kategorię.
+Dzięki temu zabiegowi mamy tylko 8 unikatowych kategorii.
+
+Stworzyłem tabelę przestawną w excelu i zauważyłem, że w kategoriach Car&Morotbike, Health&PersonalCare, Homelmprovement, MusicalInstruments oraz Toys&Games mamy od 1 do 2 danych. W Office Products mamy 31 danych. Nie będę badał wcześniej wspomnianych kategorii z powodu zbyt małej ilości danych.
+
+Po takim wyczyszczeniu danych zostaliśmy z danymi należącymi do 3 kategorii:
+-Computers&Accessories(453)
+-Electronics(526)
+-Home&Kitchen(447)
+ 
+
+a)
+Postanowiłem sprawdzić produkty jakich kategorii w jakich cenach są najbardziej opłacalne.
+Podzieliłem produkty na pięć przedziałów:
+>1500, 1500-3000, 3000-4500, 4500-6000, +6000 rozważając komputery i akcesoria, elektronikę oraz produkty do domu oraz kuchni.
+Z wykresu widzimy, że najwięcej, czyli 10 460 529$ zarobiła tania elektronika, a następnie tanie komputery i akcesoria. Trzecie miejsce zajęła najdroższa elektronika.
+
+
+b)
+Stworzyłem 10 przedziałów klasowych, aby łatwo było sprawdzić czy istnieje jakaś zależność.
+Dzięki podzieleniu danych na przedziały możemy jasno zobaczyć, że nasze dane układają się w rozkład normalny.
+Jak widzimy najwięcej produktów sprzedaje się gdy wyprzedaż produktu wynosi od 40% do 70%.
+Przecenienie produktu o wcześniej wspomniane % znacznie większa zainteresowanie klienta i przyczynia się do zakupu produktu.
+Możemy się zastanowić dlaczego produkty które mają przecenę +80% nie sprzedają się tak dobrze?
+Tak duże promocje mogą się zdarzać bardzo rzadko, przez co ilość danych jaką posiadamy wykazuje nam to w takie sposób, albo zbyt wysoka przecena nie budzi w klientach zaufania do produktu, a nawet podejrzenie, że produkt może być wadliwy.
+Produkty od 10% do 40% jak każdy się mógł spodziewać sprzedają się lepiej w zależności od wysokości przeceny. Takie oferty nie wywołują niepokoju odnośnie jakości produktu.
+
+
+c)
+Czy istnieje korelacja między oceną produktu, a ilością ocen?
+Istnieje bardzo duża korelacja między ilością zakupionych produktów które posiadają daną ocenę.
+Na wykresie od razu można zauważyć, że ilość zakupionych produktów z oceną >3,7 jest znikoma.
+Najchętniej wybieranymi produktami przez klientów są produkty których ocena jest w przedziale od 3.8 do 4.5.
+Produkty z ratingiem <4.5 także nie są często kupowane.
